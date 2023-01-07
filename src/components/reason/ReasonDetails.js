@@ -1,50 +1,46 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
-import {getEmployeeByIdApiCall} from '../../apiCalls/employeeApiCalls'
+import {getReasonByIdApiCall} from '../../apiCalls/reasonApiCalls'
 import {getFormattedDate} from '../../helpers/dateHelper'
 
-function EmployeeDetails() {
-    let {empId} = useParams()
-    empId = parseInt(empId)
-    const emp = getEmployeeByIdApiCall(empId)
-    console.log(emp)
+function ReasonDetails() {
+    let {reasonId} = useParams()
+    reasonId = parseInt(reasonId)
+    const reason = getReasonByIdApiCall(reasonId)
+    console.log(reason)
 
     return (
         <main>
-            <h2>Szczegóły pracownika</h2>
-            <p>Imię: {emp.Name}</p>
-            <p>Drugie imię: {emp.SecondName}</p>
-            <p>Nazwisko: {emp.Surname} </p>
-            <p>E-mail: {emp.Email} </p>
+            <h2>Szczegóły powodu</h2>
+            <p>Typ nieobecności: {reason.Name}</p>
+            <p>% Wynagrodzenia: {reason.SalaryPercentage}</p>
             <h2>Lista nieobecności</h2>
             <table className="table-list">
                 <thead>
                 <tr>
-                    <th>Typ nieobecności</th>
+                    <th>Pracownik</th>
                     <th>Data OD</th>
                     <th>Data DO</th>
                     <th>Akceptacja</th>
-                    <th>% Wynagrodzenia</th>
                 </tr>
                 </thead>
                 <tbody>
-                {emp.absences.map(
+                {reason.absences.map(
                     abs =>
                         <tr key={abs.IdAbsence}>
-                            <td>{abs.reason.Name}</td>
+                            <td>{abs.employee.Name + ", " + (abs.employee.SecondName ? abs.employee.SecondName + " " : "") + abs.employee.Surname}</td>
                             <td>{abs.DateFrom ? getFormattedDate(abs.DateFrom) : ""}</td>
                             <td>{abs.DateTo ? getFormattedDate(abs.DateTo) : ""}</td>
                             <td>{abs.IsAccepted ? "Tak" : "Nie"}</td>
-                            <td>{abs.reason.SalaryPercentage}</td>
                         </tr>
                 )}
                 </tbody>
             </table>
             <div className="section-buttons">
-                <Link to="/employee" className="button-back">Powrót</Link>
+                <Link to="/reason" className="button-back">Powrót</Link>
             </div>
         </main>
     )
 }
 
-export default EmployeeDetails
+export default ReasonDetails

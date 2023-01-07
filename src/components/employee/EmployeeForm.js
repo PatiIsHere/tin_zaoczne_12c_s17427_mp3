@@ -24,6 +24,11 @@ class EmployeeForm extends React.Component {
                     <input type="text" name="Email" id="Email" placeholder="6-100 znaków" value={""}/>
                     <span id="errorLastName" className="errors-text"></span>
 
+                    <label htmlFor="Password">Hasło: <abbr title={"required"}
+                                                           aria-label={"required"}>*</abbr></label>
+                    <input type="password" name="Password" id="Password" placeholder="preferowane 6 znaków" value={""}/>
+                    <span id="errorPassword" className="errors-text"></span>
+
                     <div className="form-buttons">
                         <span id="errorsSummary" className="errors-text"></span>
                         <input type="submit" value="Dodaj" className="form-button-submit"/>
