@@ -1,47 +1,64 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {getReasonApiCall} from "../../apiCalls/reasonApiCalls";
+import ReasonListTable from "./ReasonListTable"
 
-function ReasonList() {
-    const reasonList = getReasonApiCall()
-    return (
-        <main>
-            <h2>Lista pracowników</h2>
-            <table className="table-list">
-                <thead>
+class ReasonList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            reasons: []
+        }
+    }
 
-                <tr>
-                    <th>Typ nieobecności</th>
-                    <th>% Wynagrodzenia</th>
-                    <th>Akcje</th>
-                </tr>
-                </thead>
-                <tbody>
-                {reasonList.map(reason => (
-                    <tr key={reason.IdReason}>
-                        <td>{reason.Name}</td>
-                        <td>{reason.SalaryPercentage}</td>
-                        <td>
-                            <ul className="list-actions">
-                                <div>
-                                    <li><Link to={`/reason/details/${reason.IdReason}`}
-                                              className="list-actions-button-details">Szczegóły</Link></li>
-                                    <li><Link to={`/reason/edit/${reason.IdReason}`}
-                                              className="list-actions-button-edit">Edytuj</Link></li>
-                                    <li><Link to={`/reason/delete/${reason.IdReason}`}
-                                              className="list-actions-button-delete">Usuń</Link></li>
-                                </div>
-                            </ul>
-                        </td>
-                    </tr>
-                ))}
+    fetchReasonList = () => {
+        getReasonApiCall()
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    this.setState({
+                        isLoaded: true,
+                        reasons: data
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
 
-                </tbody>
-            </table>
-            <p><Link to={"/reason/add/"} className="button-add">Dodaj nowy powód</Link></p>
-        </main>
+    componentDidMount() {
+        this.fetchReasonList()
+    }
 
-    )
+    render() {
+        const {error, isLoaded, reasons} = this.state;
+        let content;
+
+        if (error) {
+            content = <p>Błąd: {error.message} </p>
+        } else if (!isLoaded) {
+            content = <p>Ładowanie danych powodów...</p>
+        } else {
+            content = <ReasonListTable reasonList={reasons}/>
+        }
+
+        return (
+            <main>
+                <h2>Lista powodów</h2>
+                {content}
+                <p className="section-buttons">
+                    <Link to="/reason/add" className="button-add">Dodaj nowy powód</Link>
+                </p>
+            </main>
+        )
+
+    }
 }
 
 export default ReasonList

@@ -1,70 +1,80 @@
-import React, {useEffect, useState} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import React from 'react'
+import {Link} from 'react-router-dom'
 import {getEmployeeByIdApiCall} from '../../apiCalls/employeeApiCalls'
 import EmployeeDetailsData from "./EmployeeDetailsData";
 
-function EmployeeDetails() {
-    // let {empId} = useParams()
-    //  const [empId, setEmpId] = useState(useParams());
-    // empId = parseInt(empId)
-    const [empId, setEmpId] = useState(useParams());
-    const [emp, setEmp] = useState(null);
-    const [error, setError] = useState(null)
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [message, setMessage] = useState(null)
+class EmployeeDetails extends React.Component {
 
-    useEffect(() => {
-        checkState();
-        getEmpDetails();
-    }, [])
-
-
-    const checkState = () => {
-        let content;
-
-        if (error) {
-            content = <p>Błąd: {error.message}</p>
-        } else if (!isLoaded) {
-            content = <p>Ladowanie danych kierowcy</p>
-        } else if (message) {
-            content = <p>{message}</p>
-        } else {
-            content = <EmployeeDetailsData emp={emp}/>
+    constructor(props) {
+        super(props)
+        console.log(props)
+        let {empId} = this.props.match.params
+        this.state = {
+            empId: empId,
+            emp: null,
+            error: null,
+            isLoaded: false,
+            message: null
         }
-
-        return content
     }
 
-    const getEmpDetails = () => {
-        getEmployeeByIdApiCall(empId)
+    fetchEmployeeDetails = () => {
+        getEmployeeByIdApiCall(this.state.empId)
             .then(res => res.json())
             .then(
                 (data) => {
                     if (data.message) {
-                        setEmp(null);
-                        setMessage(data.message);
+                        this.setState({
+                            emp: null,
+                            message: data.message
+                        })
                     } else {
-                        setEmp(data);
-                        setMessage(null)
+                        this.setState({
+                            emp: data,
+                            message: null
+                        })
                     }
-                    setIsLoaded(true);
+                    this.setState({
+                        isLoaded: true,
+                    })
                 },
                 (error) => {
-                    setIsLoaded(true);
-                    setError(error)
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
                 }
             )
     }
-    return (
-        <main>
-            <h2>Szczegóły pracownika</h2>
-            {checkState()}
-            <div className="section-buttons">
-                <Link to="/employee" className="button-back">Powrót</Link>
-            </div>
-        </main>
-    )
 
+    componentDidMount() {
+        this.fetchEmployeeDetails()
+    }
+
+    render() {
+        const {emp, error, isLoaded, message} = this.state
+        let content;
+
+        if (error) {
+            content = <p>Błąd: {error.message} </p>
+        } else if (!isLoaded) {
+            content = <p>Ładowanie danych pracownika...</p>
+        } else if (message) {
+            content = <p>{message}</p>
+        } else {
+            content = <EmployeeDetailsData empData={emp}/>
+        }
+
+        return (
+            <main>
+                <h2>Szczegóły pracownika</h2>
+                {content}
+                <div className="section-buttons">
+                    <Link to="/employee" className="button-back">Powrót</Link>
+                </div>
+            </main>
+        )
+    }
 }
 
 export default EmployeeDetails

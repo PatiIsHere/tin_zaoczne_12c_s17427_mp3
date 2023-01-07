@@ -18,31 +18,32 @@ import ReasonForm from "./components/reason/ReasonForm";
 
 import {
     BrowserRouter as Router,
-    Routes,
-    Route
+    Switch, Route
 } from "react-router-dom";
 
 function App() {
     return (
         <Router>
-            <Header/>
-            <Navigation/>
-            <Routes>
-                <Route exact path="/" element={<MainContent/>}/>
-                <Route exact path="/employee" element={<EmployeeList/>}/>
-                <Route exact path="employee/details/:empId" element={<EmployeeDetails/>}/>
-                <Route exact path="employee/add/" element={<EmployeeForm/>}/>
-                <Route exact path="employee/edit/:empId" element={<EmployeeForm/>}/>
-                <Route exact path="/absence" element={<AbsenceList/>}/>
-                <Route exact path="absence/details/:absenceId" element={<AbsenceDetails/>}/>
-                <Route exact path="absence/add/" element={<AbsenceForm/>}/>
-                <Route exact path="absence/edit/:empId" element={<AbsenceForm/>}/>
-                <Route exact path="/reason" element={<ReasonList/>}/>
-                <Route exact path="reason/details/:reasonId" element={<ReasonDetails/>}/>
-                <Route exact path="reason/add/" element={<ReasonForm/>}/>
-                <Route exact path="reason/edit/:empId" element={<ReasonForm/>}/>
-            </Routes>
-            <Footer/>
+            <div>
+                <Header/>
+                <Navigation/>
+                <Switch>
+                    <Route exact path="/" component={MainContent}/>
+                    <Route exact path="/employee" component={EmployeeList}/>
+                    <Route exact path="/employee/details/:empId" component={EmployeeDetails}/>
+                    <Route exact path="employee/add/" component={EmployeeForm}/>
+                    <Route exact path="/employee/edit/:empId" component={EmployeeForm}/>
+                    <Route exact path="/absence" component={AbsenceList}/>
+                    <Route exact path="/absence/details/:absenceId" component={AbsenceDetails}/>
+                    <Route exact path="/absence/add/" component={AbsenceForm}/>
+                    <Route exact path="/absence/edit/:empId" component={AbsenceForm}/>
+                    <Route exact path="/reason" component={ReasonList}/>
+                    <Route exact path="/reason/details/:reasonId" component={ReasonDetails}/>
+                    <Route exact path="/reason/add/" component={ReasonForm}/>
+                    <Route exact path="/reason/edit/:empId" component={ReasonForm}/>
+                </Switch>
+                <Footer/>
+            </div>
         </Router>
     );
 }

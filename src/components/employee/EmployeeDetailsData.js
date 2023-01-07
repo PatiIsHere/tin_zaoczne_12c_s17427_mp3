@@ -22,15 +22,8 @@ function EmployeeDetailsData(props) {
                 </tr>
                 </thead>
                 <tbody>
-                {emp.absences.map(
-                    abs =>
-                        <tr key={abs.IdAbsence}>
-                            <td>{abs.reason.Name}</td>
-                            <td>{abs.DateFrom ? getFormattedDate(abs.DateFrom) : ""}</td>
-                            <td>{abs.DateTo ? getFormattedDate(abs.DateTo) : ""}</td>
-                            <td>{abs.IsAccepted ? "Tak" : "Nie"}</td>
-                            <td>{abs.reason.SalaryPercentage}</td>
-                        </tr>
+                {emp.absences.map(abs =>
+                    <EmployeeDetailsDataRow absData={abs} key={abs.IdAbsence}/>
                 )}
                 </tbody>
             </table>
