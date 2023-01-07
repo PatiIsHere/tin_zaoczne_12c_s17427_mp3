@@ -1,50 +1,70 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {getEmployeeByIdApiCall} from '../../apiCalls/employeeApiCalls'
-import {getFormattedDate} from '../../helpers/dateHelper'
+import EmployeeDetailsData from "./EmployeeDetailsData";
 
 function EmployeeDetails() {
-    let {empId} = useParams()
-    empId = parseInt(empId)
-    const emp = getEmployeeByIdApiCall(empId)
-    console.log(emp)
+    // let {empId} = useParams()
+    //  const [empId, setEmpId] = useState(useParams());
+    // empId = parseInt(empId)
+    const [empId, setEmpId] = useState(useParams());
+    const [emp, setEmp] = useState(null);
+    const [error, setError] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [message, setMessage] = useState(null)
 
+    useEffect(() => {
+        checkState();
+        getEmpDetails();
+    }, [])
+
+
+    const checkState = () => {
+        let content;
+
+        if (error) {
+            content = <p>Błąd: {error.message}</p>
+        } else if (!isLoaded) {
+            content = <p>Ladowanie danych kierowcy</p>
+        } else if (message) {
+            content = <p>{message}</p>
+        } else {
+            content = <EmployeeDetailsData emp={emp}/>
+        }
+
+        return content
+    }
+
+    const getEmpDetails = () => {
+        getEmployeeByIdApiCall(empId)
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    if (data.message) {
+                        setEmp(null);
+                        setMessage(data.message);
+                    } else {
+                        setEmp(data);
+                        setMessage(null)
+                    }
+                    setIsLoaded(true);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error)
+                }
+            )
+    }
     return (
         <main>
             <h2>Szczegóły pracownika</h2>
-            <p>Imię: {emp.Name}</p>
-            <p>Drugie imię: {emp.SecondName}</p>
-            <p>Nazwisko: {emp.Surname} </p>
-            <p>E-mail: {emp.Email} </p>
-            <h2>Lista nieobecności</h2>
-            <table className="table-list">
-                <thead>
-                <tr>
-                    <th>Typ nieobecności</th>
-                    <th>Data OD</th>
-                    <th>Data DO</th>
-                    <th>Akceptacja</th>
-                    <th>% Wynagrodzenia</th>
-                </tr>
-                </thead>
-                <tbody>
-                {emp.absences.map(
-                    abs =>
-                        <tr key={abs.IdAbsence}>
-                            <td>{abs.reason.Name}</td>
-                            <td>{abs.DateFrom ? getFormattedDate(abs.DateFrom) : ""}</td>
-                            <td>{abs.DateTo ? getFormattedDate(abs.DateTo) : ""}</td>
-                            <td>{abs.IsAccepted ? "Tak" : "Nie"}</td>
-                            <td>{abs.reason.SalaryPercentage}</td>
-                        </tr>
-                )}
-                </tbody>
-            </table>
+            {checkState()}
             <div className="section-buttons">
                 <Link to="/employee" className="button-back">Powrót</Link>
             </div>
         </main>
     )
+
 }
 
 export default EmployeeDetails
