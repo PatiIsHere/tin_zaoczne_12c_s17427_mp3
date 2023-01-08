@@ -6,10 +6,13 @@ import ReasonListTable from "./ReasonListTable"
 class ReasonList extends React.Component {
     constructor(props) {
         super(props);
+        const {state} = props.location;
+        const notice = state && state.notice ? state.notice : '';
         this.state = {
             error: null,
             isLoaded: false,
-            reasons: []
+            reasons: [],
+            notice: notice
         }
     }
 
@@ -50,6 +53,7 @@ class ReasonList extends React.Component {
 
         return (
             <main>
+                <p className="success">{this.state.notice}</p>
                 <h2>Lista powodów</h2>
                 {content}
                 <p className="section-buttons">

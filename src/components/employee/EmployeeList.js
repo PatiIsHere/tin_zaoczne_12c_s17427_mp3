@@ -6,13 +6,14 @@ import EmployeeListTable from "./EmployeeListTable";
 class EmployeeList extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
+        const {state} = props.location;
+        const notice = state && state.notice ? state.notice : '';
         this.state = {
             error: null,
             isLoaded: false,
-            employees: []
+            employees: [],
+            notice: notice
         }
-        // this.fetchEmployeeList = this.fetchEmployeeList.bind(this)
     }
 
     fetchEmployeeList = () => {
@@ -52,6 +53,7 @@ class EmployeeList extends React.Component {
 
         return (
             <main>
+                <p className="success">{this.state.notice}</p>
                 <h2>Lista pracowników</h2>
                 {content}
                 <p className="section-buttons">

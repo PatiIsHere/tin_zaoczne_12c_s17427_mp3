@@ -2,8 +2,31 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {getEmployeeApiCall} from "../../apiCalls/employeeApiCalls";
 import {getReasonApiCall} from "../../apiCalls/reasonApiCalls";
+import formMode from "../../helpers/formHelper";
 
 class AbsenceForm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const paramsIdAbsence = props.match.params.absenceId
+        const currentFormMode = paramsIdAbsence ? formMode.EDIT : formMode.NEW
+
+        this.state = {
+            IdAbsence: paramsIdAbsence,
+            absence: {
+                Name: '',
+                SalaryPercentage: ''
+            },
+            errors: {
+                Name: '',
+                SalaryPercentage: ''
+            },
+            formMode: currentFormMode,
+            redirect: false,
+            error: null
+        }
+    }
+
     render() {
         const allEmps = getEmployeeApiCall()
         const allReasons = getReasonApiCall()

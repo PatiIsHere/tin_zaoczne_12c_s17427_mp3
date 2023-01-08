@@ -31,7 +31,7 @@ function App() {
                     <Route exact path="/" component={MainContent}/>
                     <Route exact path="/employee" component={EmployeeList}/>
                     <Route exact path="/employee/details/:empId" component={EmployeeDetails}/>
-                    <Route exact path="employee/add/" component={EmployeeForm}/>
+                    <Route exact path="/employee/add/" component={EmployeeForm}/>
                     <Route exact path="/employee/edit/:empId" component={EmployeeForm}/>
                     <Route exact path="/absence" component={AbsenceList}/>
                     <Route exact path="/absence/details/:absenceId" component={AbsenceDetails}/>

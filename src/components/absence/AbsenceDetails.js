@@ -1,30 +1,80 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {getAbsenceByIdApiCall} from '../../apiCalls/absenceApiCalls'
-import {getFormattedDate} from '../../helpers/dateHelper'
+import AbsenceDetailsData from "./AbsenceDetailsData";
 
-function AbsenceDetails() {
-    let {absenceId} = useParams()
-    absenceId = parseInt(absenceId)
-    const absence = getAbsenceByIdApiCall(absenceId)
-    console.log(absence)
+class AbsenceDetails extends React.Component {
 
-    return (
-        <main>
-            <h2>Szczegóły nieobecności</h2>
-            <p>Typ nieobecności: {absence.reason.Name}</p>
-            <p>Data OD: {absence.DateFrom ? getFormattedDate(absence.DateFrom) : ""}</p>
-            <p>Data DO: {absence.DateTo ? getFormattedDate(absence.DateTo) : ""}</p>
-            <p>Pracownik: {absence.employee.Name + ", " + (absence.employee.SecondName ? absence.employee.SecondName + " " : "") + absence.employee.Surname}</p>
-            {/*<p>Pracownik: {absence.employee.Name}</p>*/}
-            <p>Akceptacja: {absence.IsAccepted}</p>
-            <p>% Wynagrodzenia: {absence.reason.SalaryPercentage}</p>
+    constructor(props) {
+        super(props)
+        console.log(props)
+        let {absenceId} = this.props.match.params
+        this.state = {
+            absenceId: absenceId,
+            absence: null,
+            error: null,
+            isLoaded: false,
+            message: null
+        }
+    }
 
-            <div className="section-buttons">
-                <Link to="/absence" className="button-back">Powrót</Link>
-            </div>
-        </main>
-    )
+    fetchAbsenceDetails = () => {
+        getAbsenceByIdApiCall(this.state.absenceId)
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    if (data.message) {
+                        this.setState({
+                            absence: null,
+                            message: data.message
+                        })
+                    } else {
+                        this.setState({
+                            absence: data,
+                            message: null
+                        })
+                    }
+                    this.setState({
+                        isLoaded: true,
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
+    }
+
+    componentDidMount() {
+        this.fetchAbsenceDetails()
+    }
+
+    render() {
+        const {absence, error, isLoaded, message} = this.state
+        let content;
+
+        if (error) {
+            content = <p>Błąd: {error.message} </p>
+        } else if (!isLoaded) {
+            content = <p>Ładowanie danych nieobecności...</p>
+        } else if (message) {
+            content = <p>{message}</p>
+        } else {
+            content = <AbsenceDetailsData absenceData={absence}/>
+        }
+
+        return (
+            <main>
+                <h2>Szczegóły nieobecności</h2>
+                {content}
+                <div className="section-buttons">
+                    <Link to="/absence" className="button-back">Powrót</Link>
+                </div>
+            </main>
+        )
+    }
 }
 
 export default AbsenceDetails

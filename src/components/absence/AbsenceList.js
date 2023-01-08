@@ -1,56 +1,67 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {getAbsenceApiCall} from "../../apiCalls/absenceApiCalls";
-import {getFormattedDate} from '../../helpers/dateHelper'
+import AbsenceListTable from "./AbsenceListTable"
 
-function AbsenceList() {
-    const absenceList = getAbsenceApiCall()
-    return (
-        <main>
-            <h2>Lista nieobecności</h2>
-            <table className="table-list">
-                <thead>
+class AbsenceList extends React.Component {
+    constructor(props) {
+        super(props)
+        const {state} = props.location;
+        const notice = state && state.notice ? state.notice : '';
+        this.state = {
+            error: null,
+            isLoaded: false,
+            absences: [],
+            notice: notice
+        }
+    }
 
-                <tr>
-                    <th>Typ nieobecności</th>
-                    <th>Data OD</th>
-                    <th>Data DO</th>
-                    <th>Imię</th>
-                    <th>Nazwisko</th>
-                    <th>Akceptacja</th>
-                    <th>Akcje</th>
-                </tr>
-                </thead>
-                <tbody>
-                {absenceList.map(absence => (
-                    <tr key={absence.IdAbsence}>
-                        <td>{absence.reason.Name}</td>
-                        <td>{absence.DateFrom ? getFormattedDate(absence.DateFrom) : ""}</td>
-                        <td>{absence.DateTo ? getFormattedDate(absence.DateTo) : ""}</td>
-                        <td>{absence.employee.Name}</td>
-                        <td>{absence.employee.Surname}</td>
-                        <td>{absence.IsAccepted ? "Tak" : "Nie"}</td>
-                        <td>
-                            <ul className="list-actions">
-                                <div>
-                                    <li><Link to={`/absence/details/${absence.IdAbsence}`}
-                                              className="list-actions-button-details">Szczegóły</Link></li>
-                                    <li><Link to={`/absence/edit/${absence.IdAbsence}`}
-                                              className="list-actions-button-edit">Edytuj</Link></li>
-                                    <li><Link to={`/absence/delete/${absence.IdAbsence}`}
-                                              className="list-actions-button-delete">Usuń</Link></li>
-                                </div>
-                            </ul>
-                        </td>
-                    </tr>
-                ))}
+    fetchAbsenceList() {
+        getAbsenceApiCall()
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    this.setState({
+                        isLoaded: true,
+                        absences: data
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
 
-                </tbody>
-            </table>
-            <p><Link to={"/absence/add/"} className="button-add">Dodaj nową nieobecność</Link></p>
-        </main>
+    componentDidMount() {
+        this.fetchAbsenceList()
+    }
 
-    )
+    render() {
+        const {error, isLoaded, absences} = this.state
+        let content;
+
+        if (error) {
+            content = <p>Błąd: {error.message}</p>
+        } else if (!isLoaded) {
+            content = <p>Ładowanie danych zatrudnień...</p>
+        } else {
+            content = <AbsenceListTable absencesList={absences}/>
+        }
+
+        return (
+            <main>
+                <p className="success">{this.state.notice}</p>
+                <h2>Lista nieobecności</h2>
+                {content}
+                <p className="section-buttons">
+                    <Link to="/absence/add" className="button-add">Dodaj nową nieobecność</Link>
+                </p>
+            </main>
+        )
+    }
 }
 
 export default AbsenceList
