@@ -172,9 +172,9 @@ class AbsenceForm extends React.Component {
             } else if (!validationCommon.checkDate(fieldValue)) {
                 errorMessage = 'ma byc data'
             } else {
-                // if (!validationCommon.checkDateIsAfter(fieldValue, getFormattedDate(this.state.absence.DateFrom))) {
-                //     errorMessage = 'nie moze byc przed data od'
-                // }
+                if (!validationCommon.checkDateIsAfter(getFormattedDate(fieldValue), getFormattedDate(this.state.absence.DateFrom))) {
+                    errorMessage = 'nie moze byc przed data od'
+                }
             }
         }
 
@@ -185,7 +185,7 @@ class AbsenceForm extends React.Component {
         }
 
         if (fieldName === 'IsAccepted') {
-            if (!validationCommon.checkRequired(fieldValue)) {
+            if (!validationCommon.checkRequired(fieldValue.toString())) {
                 errorMessage = 'wymagane'
             }
         }
@@ -270,6 +270,8 @@ class AbsenceForm extends React.Component {
                     )
             }
         }
+        console.log("Test danych")
+        console.log(this.state.absence)
     }
 
 
