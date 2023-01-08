@@ -7,7 +7,6 @@ import {updateReasonApiCall} from "../../apiCalls/reasonApiCalls";
 import FormInput from "../form/FormInput"
 import FormButtons from "../form/FormButtons";
 import * as validationCommon from "../../helpers/validateCommon";
-import {addEmployeeApiCall, getEmployeeByIdApiCall, updateEmployeeApiCall} from "../../apiCalls/employeeApiCalls";
 
 class ReasonForm extends React.Component {
 
@@ -149,7 +148,7 @@ class ReasonForm extends React.Component {
 
             } else if (currentFormMode === formMode.EDIT) {
                 const reasonId = this.state.IdReason
-                promise = updateEmployeeApiCall(reasonId, reason)
+                promise = updateReasonApiCall(reasonId, reason)
             }
             if (promise) {
                 promise
@@ -211,6 +210,65 @@ class ReasonForm extends React.Component {
         const globalErrorMessage = errorsSummary || fetchError || this.state.message
 
         return (
+            // <main>
+            //     <h2>{pageTitle}</h2>
+            //     <form className='form' onSubmit={handleSubmit}>
+            //         <label htmlFor='user_id'>{t('rentals.placeholders.form.chooseUser')}:</label>
+            //         {!id && <select name='user_id' onChange={handleSelectChange}
+            //                         className={userIdError.length > 0 ? 'error-input' : ''}>
+            //             <option value="">{t('rentals.placeholders.form.chooseUser')}</option>
+            //             {
+            //                 users.map(user => (
+            //                     <option key={user.id} value={user.id}>{user.firstname} {user.lastname}</option>
+            //                 ))
+            //             }
+            //         </select>}
+            //         {
+            //             id && <select name='user_id' onChange={handleSelectChange}
+            //                           className={userIdError.length > 0 ? 'error-input' : ''}>
+            //                 <option
+            //                     value={users.find(x => x.id === rentDetails.user_id)?.id}>{users.find(x => x.id === rentDetails.user_id)?.firstname} {users.find(x => x.id === rentDetails.user_id)?.lastname}</option>
+            //                 {
+            //                     users.filter(x => x.id !== rentDetails.user_id).map(user => (
+            //                         <option key={user.id} value={user.id}>{user.firstname} {user.lastname}</option>
+            //                     ))
+            //                 }
+            //             </select>
+            //         }
+            //         <span id='error-user_id' className='errors-text'>{userIdError}</span>
+            //         <label htmlFor='game_id'>{t('rentals.placeholders.form.chooseGame')}:</label>
+            //         {!id && <select name='game_id' onChange={handleSelectChange}
+            //                         className={gameIdError.length > 0 ? 'error-input' : ''}>
+            //             <option value="">{t('rentals.placeholders.form.chooseGame')}</option>
+            //             {
+            //                 games.map(game => (
+            //                     <option key={game.id} value={game.id}>{game.name}</option>
+            //                 ))
+            //             }
+            //         </select>}
+            //         {
+            //             id && <select name='game_id' onChange={handleSelectChange}
+            //                           className={gameIdError.length > 0 ? 'error-input' : ''}>
+            //                 <option
+            //                     value={games.find(x => x.id === rentDetails.game_id)?.id}>{games.find(x => x.id === rentDetails.game_id)?.name}</option>
+            //                 {
+            //                     games.filter(x => x.id !== rentDetails.game_id).map(game => (
+            //                         <option key={game.id} value={game.id}>{game.name}</option>
+            //                     ))
+            //                 }
+            //             </select>
+            //         }
+            //         <span id="error-game_id" className='errors-text'>{gameIdError}</span>
+            //         <FormInput type="date" label={t('rentals.placeholders.form.toWhenDate')} name="to_when"
+            //                    value={to_when} onChange={handleChange} error={toWhenError} required/>
+            //         <FormInput type="number" label={t('rentals.placeholders.form.gameCount')} name="game_count"
+            //                    value={game_count} onChange={handleChange} error={gameCountError} required
+            //                    placeholder={t('rentals.placeholders.form.gameCount')}/>
+            //         <FormButton mode={id ? formMode.EDIT : formMode.NEW} error={globalErrorMessage}
+            //                     cancelPath="/gameRent"/>
+            //     </form>
+            // </main>
+
             <main>
                 <h2>{pageTitle}</h2>
                 <form className="form" onSubmit={this.handleSubmit}>
