@@ -1,9 +1,11 @@
 import React from "react";
+import {useTranslation} from "react-i18next";
 
-function MainContent(){
-    return(
+function MainContent() {
+    const {t} = useTranslation()
+    return (
         <main>
-            <h2>Strona główna</h2>
+            <h2>{t('main-page.content')}</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore
                 magna aliqua.

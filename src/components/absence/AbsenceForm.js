@@ -270,8 +270,6 @@ class AbsenceForm extends React.Component {
                     )
             }
         }
-        console.log("Test danych")
-        console.log(this.state.absence)
     }
 
 

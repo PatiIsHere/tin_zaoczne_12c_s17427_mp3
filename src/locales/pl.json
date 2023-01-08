@@ -1,0 +1,184 @@
+{
+  "main-page": {
+    "content": "Strona główna"
+  },
+  "nav": {
+    "main-page": "Strona główna",
+    "employees": "Pracownicy",
+    "absences": "Nieobecności",
+    "reasons": "Powody"
+  },
+  "list": {
+    "actions": {
+      "title": "Akcje",
+      "details": "Szczegóły",
+      "edit": "Edytuj",
+      "delete": "Usuń"
+    }
+  },
+  "form": {
+    "actions": {
+      "return": "Powrót",
+      "edit": "Edytuj",
+      "cancel": "Anuluj"
+    }
+  },
+  "login": {
+    "email": "Email",
+    "password": "Hasło",
+    "welcomeInfo": "Jesteś zalogowany jako",
+    "btnLogInLabel": "Zaloguj",
+    "btnLogOutLabel": "Wyloguj"
+  },
+  "employee": {
+    "title": "Pracownik",
+    "fields": {
+      "name": "Imię",
+      "secondName": "Drugie imię",
+      "surname": "Nazwisko",
+      "email": "Email",
+      "password": "Hasło"
+    },
+    "list": {
+      "title": "Lista pracowników",
+      "addNew": "Dodaj nowego pracownika",
+      "noData": "Brak pracowników w bazie",
+      "pageTitle": "Lista pracowników"
+    },
+    "form": {
+      "add": {
+        "pageTitle": "Dodawanie pracownika",
+        "btnLabel": "Dodaj pracownika",
+        "confirm": {
+          "header": "Potwierdzenie operacji",
+          "text": "Pomyślnie dodano pracownika"
+        }
+      },
+      "edit": {
+        "pageTitle": "Edycja pracownika",
+        "btnLabel": "Zapisz zmiany",
+        "confirm": {
+          "header": "Potwierdzenie operacji",
+          "text": "Pomyślnie zaktualizowano pracownika"
+        }
+      },
+      "details": {
+        "pageTitle": "Szczegóły pracownika"
+      },
+      "placeholder": {
+        "password": "Preferowane 6 znaków",
+        "email": "6-100 znaków",
+        "surname": "2-100 znaków",
+        "secondName": "Brak lub 2-50 znaków",
+        "name": "2-50 znaków"
+      }
+    },
+    "infoText": {
+      "deleted": "Pracownik usunięty pomyślnie",
+      "updated": "Pracownik zaktualizowany pomyślnie",
+      "added": "Pracownik dodany pomyślnie"
+    }
+  },
+  "absence": {
+    "title": "Nieobecność",
+    "fields": {
+      "dateFrom": "Data OD",
+      "dateTo": "Data DO",
+      "isAccepted": "Akceptacja"
+    },
+    "acceptanceMap": {
+      "yes": "Tak",
+      "no": "Nie"
+    },
+    "list": {
+      "title": "Lista nieobecności",
+      "addNew": "Dodaj nową nieobecność",
+      "noData": "Brak nieobecności w bazie",
+      "pageTitle": "Lista nieobecności"
+    },
+    "form": {
+      "add": {
+        "pageTitle": "Dodawanie nieobecności",
+        "btnLabel": "Dodaj nieobecność"
+      },
+      "edit": {
+        "pageTitle": "Edycja pracownika",
+        "btnLabel": "Zapisz zmiany",
+        "confirm": {
+          "header": "Potwierdzenie operacji",
+          "text": "Pomyślnie zaktualizowano pracownika"
+        }
+      },
+      "select-option-message": {
+        "chooseReason": "-- Wybierz typ nieobecności --",
+        "chooseEmployee": "-- Wybierz pracownika --",
+        "chooseAcceptance": "-- Wybierz akceptacje --"
+      },
+      "details": {
+        "pageTitle": "Szczegóły nieobecności"
+      }
+    },
+    "infoText": {
+      "deleted": "Nieobecność usunięta pomyślnie",
+      "updated": "Nieobecność zaktualizowana pomyślnie",
+      "added": "Nieobecność dodana pomyślnie"
+    },
+    "select-optio-message": {
+      "chooseEmployee": "absence.select-optio-message.chooseEmployee",
+      "chooseAcceptance": "absence.select-optio-message.chooseAcceptance"
+    },
+    "select-option-message": {
+      "chooseEmployee": "absence.select-option-message.chooseEmployee",
+      "chooseAcceptance": "absence.select-option-message.chooseAcceptance"
+    }
+  },
+  "reason": {
+    "fields": {
+      "name": "Typ nieobecności",
+      "salaryPercentage": "% Wynagrodzenia"
+    },
+    "list": {
+      "title": "Lista powodów",
+      "addNew": "Dodaj nowy powód",
+      "noData": "Brak powodów w bazie",
+      "pageTitle": "Lista powodów"
+    },
+    "form": {
+      "add": {
+        "pageTitle": "Dodawanie powodu",
+        "btnLabel": "Dodaj powód"
+      },
+      "edit": {
+        "pageTitle": "Edycja powodu",
+        "btnLabel": "Zapisz zmiany"
+      },
+      "details": {
+        "pageTitle": "Szczegóły powodu"
+      },
+      "placeholder": {
+        "name": "2-50 znaków",
+        "salaryPercentage": "Od 0.00 do 1.00"
+      }
+    },
+    "infoText": {
+      "deleted": "Powód usunięty pomyślnie",
+      "updated": "Powód zaktualizowany pomyślnie",
+      "added": "Powód dodany pomyślnie"
+    }
+  },
+  "error": {
+    "uniqueEmail": "Podany adres email jest już używany",
+    "login": "Nieprawidłowy adres email lub hasło",
+    "default-form": "Formularz zawiera błędy",
+    "required_value": "Pole jest wymagane",
+    "dateToBeforeDateFrom": "Data zakończenia nie może być przed datą rozpoczęcia",
+    "dateFormat": "Pole powinno zawierać datę w formacie yyyy-MM-dd",
+    "dateFromPast": "Data nie może być z przeszłości",
+    "2-50signs": "Pole powinno zawierać od 2 do 50 znaków",
+    "2-100signs": "Pole powinno zawierać od 2 do 100 znaków",
+    "6-100signs": "Pole powinno zawierać od 6 do 100 znaków",
+    "email": "Pole powinno zawierać prawidłowy adres email",
+    "number": "Pole powinno być liczbą",
+    "numberBetween0And1": "Pole powinno być liczbą w zakresie 0.00 do 1.00"
+  }
+}

@@ -40,7 +40,7 @@ function App() {
                     <Route exact path="/reason" component={ReasonList}/>
                     <Route exact path="/reason/details/:reasonId" component={ReasonDetails}/>
                     <Route exact path="/reason/add/" component={ReasonForm}/>
-                    <Route exact path="/reason/edit/:empId" component={ReasonForm}/>
+                    <Route exact path="/reason/edit/:reasonId" component={ReasonForm}/>
                 </Switch>
                 <Footer/>
             </div>

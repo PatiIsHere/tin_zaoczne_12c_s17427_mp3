@@ -1,0 +1,164 @@
+{
+  "main-page": {
+    "content": "Main page"
+  },
+  "nav": {
+    "main-page": "Main page",
+    "employees": "Employees",
+    "absences": "Absences",
+    "reasons": "Reasons"
+  },
+  "list": {
+    "actions": {
+      "title": "Action",
+      "details": "Details",
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "form": {
+    "actions": {
+      "return": "Return",
+      "edit": "Edit",
+      "cancel": "Cancel"
+    }
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "welcomeInfo": "Logged in as",
+    "btnLogInLabel": "Login",
+    "btnLogOutLabel": "Logout"
+  },
+  "employee": {
+    "title": "Employee",
+    "fields": {
+      "name": "Name",
+      "secondName": "Second name",
+      "surname": "Surname",
+      "email": "Email",
+      "password": "Password"
+    },
+    "list": {
+      "title": "List of employees",
+      "addNew": "Add new employee",
+      "noData": "No employee found",
+      "pageTitle": "List of employees"
+    },
+    "form": {
+      "add": {
+        "pageTitle": "Add employee",
+        "btnLabel": "Add employee"
+      },
+      "edit": {
+        "pageTitle": "Edit employee",
+        "btnLabel": "Save changes"
+      },
+      "details": {
+        "pageTitle": "Employee details"
+      },
+      "placeholder": {
+        "password": "Preferred 6 signs",
+        "email": "6-100 signs",
+        "surname": "2-100 signs",
+        "secondName": "No value or 2-50 signs",
+        "name": "2-50 signs"
+      }
+    },
+    "infoText": {
+      "deleted": "Employee deleted successfully",
+      "updated": "Employee updated successfully",
+      "added": "Employee added successfully"
+    }
+  },
+  "absence": {
+    "title": "Absence",
+    "fields": {
+      "dateFrom": "Date FROM",
+      "dateTo": "Date TO",
+      "isAccepted": "Acceptance"
+    },
+    "acceptanceMap": {
+      "yes": "Yes",
+      "no": "No"
+    },
+    "list": {
+      "title": "List of absences",
+      "addNew": "Add new absence",
+      "noData": "No absence found",
+      "pageTitle": "List of absences"
+    },
+    "form": {
+      "add": {
+        "pageTitle": "Add absence",
+        "btnLabel": "Add absence"
+      },
+      "edit": {
+        "pageTitle": "Edit absence",
+        "btnLabel": "Save changes"
+      },
+      "select-option-message": {
+        "chooseReason": "-- Choose absence type --",
+        "chooseEmployee": "-- Choose employee --",
+        "chooseAcceptance": "-- Choose aceptance --"
+      },
+      "details": {
+        "pageTitle": "Absence details"
+      }
+    },
+    "infoText": {
+      "deleted": "Absence deleted successfully",
+      "updated": "Absence updated successfully",
+      "added": "Absence added successfully"
+    }
+  },
+  "reason": {
+    "fields": {
+      "name": "Reason type",
+      "salaryPercentage": "% Salary"
+    },
+    "list": {
+      "title": "List of reasons",
+      "addNew": "Add new reason",
+      "noData": "No reason found",
+      "pageTitle": "List of reasons"
+    },
+    "form": {
+      "add": {
+        "pageTitle": "Add reason",
+        "btnLabel": "Add reason"
+      },
+      "edit": {
+        "pageTitle": "Edit reason",
+        "btnLabel": "Save changes"
+      },
+      "details": {
+        "pageTitle": "Reason details"
+      },
+      "placeholder": {
+        "name": "2-50 signs",
+        "salaryPercentage": "Between 0.00 and 1.00"
+      }
+    },
+    "infoText": {
+      "deleted": "Reason deleted successfully",
+      "updated": "Reason updated successfully",
+      "added": "Reason added successfully"
+    }
+  },
+  "error": {
+    "uniqueEmail": "Provided email address is already in use",
+    "default-form": "Form contains errors",
+    "login": "Wrong email or password",
+    "required_value": "Value required",
+    "dateToBeforeDateFrom": "Date from cannot be before date to",
+    "dateFormat": "Field must contain date in format yyy-MM-dd",
+    "dateFromPast": "Date cannot be from the past",
+    "2-50signs": "Field should contain between 2 and 50 signs",
+    "2-100signs": "Field should contain between 2 and 100 signs",
+    "6-100signs": "Field should contain between 6 and 100 signs",
+    "email": "Field should contain correct email address",
+    "number": "Field should be number",
+    "numberBetween0And1": "Field should be number between 0.00 and 1.00"
+  }
+}
